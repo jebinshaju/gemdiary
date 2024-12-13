@@ -20,11 +20,9 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 GOOGLE_API_KEY = "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-# GOOGLE_API_KEY = "XXXXXXXXXXXX"
 
 genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash')
-# model = genai.GenerativeModel('gemini-2.0-flash-exp')
+model = genai.GenerativeModel('gemini-2.0-flash-exp')
 
 app = FastAPI()
 app.add_middleware(
