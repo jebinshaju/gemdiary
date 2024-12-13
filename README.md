@@ -114,7 +114,8 @@ GemDiary follows a modular architecture, separating concerns between the fronten
   - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework.
   - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - For interactivity.
   - [HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML) - Markup language.
-  - ![image](https://github.com/user-attachments/assets/31c4b376-3173-4443-9067-f85d7fd74aa0)
+  - ![image](https://github.com/user-attachments/assets/7740e4db-d795-4750-8196-da3da963e183)
+
 
 
 ## Setup and Installation
