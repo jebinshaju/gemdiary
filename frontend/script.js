@@ -28,8 +28,17 @@ const nextPageButton = document.getElementById("nextPageButton");
 const loadingAllDiaries = document.getElementById("loadingAllDiaries");
 const allDiariesContent = document.getElementById("allDiariesContent");
 
+// Camera Elements
+const cameraStream = document.getElementById("cameraStream");
+const startCameraButton = document.getElementById("startCameraButton");
+const captureButton = document.getElementById("captureButton");
+const canvasPreview = document.getElementById("canvasPreview");
+const capturedImage = document.getElementById("capturedImage");
+const processCapturedImageButton = document.getElementById("processCapturedImageButton");
+
 let currentPage = 1;
 const pageSize = 10;
+let videoStream = null;
 
 // Handle Image Preview
 imageInput.addEventListener("change", () => {
@@ -47,14 +56,41 @@ imageInput.addEventListener("change", () => {
     }
 });
 
-// Handle Image Upload
-uploadButton.addEventListener("click", async () => {
-    const file = imageInput.files[0];
-    if (!file) {
-        alert("Please select an image to upload.");
-        return;
+// Start Camera
+startCameraButton.addEventListener("click", async () => {
+    try {
+        videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        cameraStream.srcObject = videoStream;
+        cameraStream.classList.remove("hidden");
+        captureButton.classList.remove("hidden");
+        startCameraButton.classList.add("hidden");
+    } catch (error) {
+        console.error("Error accessing the camera:", error);
+        alert("Unable to access the camera. Please ensure it is connected and permissions are granted.");
     }
+});
 
+// Capture Image
+captureButton.addEventListener("click", () => {
+    const context = canvasPreview.getContext("2d");
+    canvasPreview.width = cameraStream.videoWidth;
+    canvasPreview.height = cameraStream.videoHeight;
+    context.drawImage(cameraStream, 0, 0, canvasPreview.width, canvasPreview.height);
+
+    const imageDataURL = canvasPreview.toDataURL("image/png");
+    capturedImage.src = imageDataURL;
+    capturedImage.classList.remove("hidden");
+    processCapturedImageButton.classList.remove("hidden");
+
+    // Stop the camera
+    videoStream.getTracks().forEach(track => track.stop());
+    cameraStream.classList.add("hidden");
+    captureButton.classList.add("hidden");
+    startCameraButton.classList.remove("hidden");
+});
+
+// Process Image Function (Common for Uploaded and Captured)
+async function processImage(file) {
     // Show loader
     loadingImage.classList.remove("hidden");
     imageDescription.textContent = "";
@@ -72,7 +108,7 @@ uploadButton.addEventListener("click", async () => {
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.detail || "Failed to upload image.");
+            throw new Error(errorData.detail || "Failed to process the image.");
         }
 
         const data = await response.json();
@@ -86,12 +122,30 @@ uploadButton.addEventListener("click", async () => {
             audioPlayerContainer.classList.remove("hidden");
         }
     } catch (error) {
-        console.error("Error uploading image:", error);
-        imageDescription.textContent = "An error occurred while uploading the image.";
+        console.error("Error processing image:", error);
+        imageDescription.textContent = "An error occurred while processing the image.";
     } finally {
         // Hide loader
         loadingImage.classList.add("hidden");
     }
+}
+
+// Upload Button
+uploadButton.addEventListener("click", async () => {
+    const file = imageInput.files[0];
+    if (!file) {
+        alert("Please select an image to upload.");
+        return;
+    }
+    await processImage(file);
+});
+
+// Process Captured Image Button
+processCapturedImageButton.addEventListener("click", async () => {
+    const response = await fetch(capturedImage.src);
+    const blob = await response.blob();
+    const file = new File([blob], "captured-image.png", { type: "image/png" });
+    await processImage(file);
 });
 
 // Fetch Today's Diary
