@@ -75,7 +75,7 @@
     <main class="container mx-auto my-10 px-6">
         <!-- Image Upload Section -->
         <section class="bg-white p-8 rounded-lg shadow-md">
-            <h2 class="text-xl font-bold mb-4">Upload an Image</h2>
+            <h2 class="text-xl font-bold mb-4">Upload or Capture an Image</h2>
             <input type="file" id="imageInput" accept="image/*" class="mb-4 block">
             <button id="uploadButton" class="btn-primary">Upload</button>
             <div id="loadingImage" class="loader hidden mt-4"></div>
@@ -88,6 +88,20 @@
                 <audio id="audioPlayback" controls></audio>
             </div>
         </section>
+
+        <!-- Camera Capture Section -->
+        <section id="camera-section" class="bg-white mt-10 p-8 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Capture Image</h2>
+            <div id="cameraContainer" class="mb-4">
+                <video id="cameraStream" autoplay class="rounded shadow-md hidden"></video>
+            </div>
+            <button id="startCameraButton" class="btn-primary mb-4">Start Camera</button>
+            <button id="captureButton" class="btn-primary mb-4 hidden">Capture Image</button>
+            <canvas id="canvasPreview" class="hidden"></canvas>
+            <img id="capturedImage" class="hidden rounded shadow-md mt-4" alt="Captured Image Preview">
+            <button id="processCapturedImageButton" class="btn-primary hidden mt-4">Process Captured Image</button>
+        </section>
+    </main>
 
         <!-- Today's Diary Section -->
         <section id="today-diary" class="bg-white mt-10 p-8 rounded-lg shadow-md">
