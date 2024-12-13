@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GemDiary</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;📓&lt;/text&gt;" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Rubik', sans-serif;
+        }
+        .audio-player {
+            border-radius: 8px;
+            background-color: #f3f4f6;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .audio-player audio {
+            width: 100%;
+        }
+        .btn-primary {
+            background-color: #4f46e5;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca;
+        }
+        .loader {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Image Preview Styles */
+        #imagePreview {
+            max-width: 150px; /* Adjust the size as needed */
+            max-height: 150px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-800">GemDiary</h1>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container mx-auto my-10 px-6">
+        <!-- Image Upload Section -->
+        <section class="bg-white p-8 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Upload an Image</h2>
+            <input type="file" id="imageInput" accept="image/*" class="mb-4 block">
+            <button id="uploadButton" class="btn-primary">Upload</button>
+            <div id="loadingImage" class="loader hidden mt-4"></div>
+            <!-- Display uploaded image -->
+            <div id="imagePreviewContainer" class="mt-4">
+                <img id="imagePreview" class="hidden rounded shadow-md" alt="Uploaded Image Preview">
+            </div>
+            <div id="imageDescription" class="mt-4 text-gray-700"></div>
+            <div id="audioPlayerContainer" class="audio-player mt-4 hidden">
+                <audio id="audioPlayback" controls></audio>
+            </div>
+        </section>
+
+        <!-- Today's Diary Section -->
+        <section id="today-diary" class="bg-white mt-10 p-8 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Today's Diary</h2>
+            <button id="fetchTodayDiaryButton" class="btn-primary">Fetch Today's Diary</button>
+            <div id="loadingTodayDiary" class="loader hidden mt-4"></div>
+            <div id="todayDiaryContent" class="mt-4 text-gray-700"></div>
+        </section>
+
+        <!-- Previous Diaries Section -->
+        <section id="previous-diary" class="bg-white mt-10 p-8 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Fetch Previous Diaries</h2>
+            <label for="diaryDate" class="block text-gray-700">Select a date:</label>
+            <input type="date" id="diaryDate" class="mt-2 p-2 border rounded">
+            <button id="fetchDiaryButton" class="btn-primary mt-4">Fetch Diary</button>
+            <div id="loadingDiary" class="loader hidden mt-4"></div>
+            <div id="diaryContent" class="mt-4 text-gray-700"></div>
+        </section>
+
+        <!-- All Diaries Section -->
+        <section id="all-diaries" class="bg-white mt-10 p-8 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">All Diaries</h2>
+            <div class="flex justify-between items-center mb-4">
+                <button id="fetchAllDiariesButton" class="btn-primary">Fetch All Diaries</button>
+                <div class="flex space-x-2">
+                    <button id="prevPageButton" class="btn-primary" disabled>Previous</button>
+                    <button id="nextPageButton" class="btn-primary">Next</button>
+                </div>
+            </div>
+            <div id="loadingAllDiaries" class="loader hidden mt-4"></div>
+            <div id="allDiariesContent" class="mt-4 text-gray-700 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-6">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-500 text-sm">Made with ❤️ by GemDiary Team</p>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
