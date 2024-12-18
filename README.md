@@ -96,6 +96,9 @@ GemDiary follows a modular architecture, separating concerns between the fronten
   - Integrates with Google Generative AI (Gemini) for image description.
   - Utilizes Google Cloud Storage and Firebase Firestore for data management.
   - Implements Text-to-Speech conversion using gTTS and pydub.
+ 
+  - ![image](https://github.com/user-attachments/assets/36260e8c-b52c-45b6-8284-2956a321dc81)
+
 
 
 
