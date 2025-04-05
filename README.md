@@ -2,7 +2,7 @@
 
 
 
-**GemDiary** is a comprehensive digital diary web application designed to empower individuals by providing detailed descriptions of their daily images and generating rich audio summaries of their activities. Leveraging advanced AI technologies, GemDiary not only enhances personal journaling but also fosters a seamless and immersive interaction between users and their recorded experiences. A standout feature of GemDiary is its **podcast generation capability**, which transforms daily summaries into engaging audio narratives. This innovative podcast functionality allows users to effortlessly revisit and reflect on their day-to-day lives, offering a unique and accessible way to cherish memories and track personal growth over time.
+**GemDiary** is a comprehensive digital diary web application designed to empower individuals by providing detailed descriptions of their daily images and generating rich audio summaries of their activities. Leveraging advanced AI technologies, GemDiary not only enhances personal journaling but also fosters a seamless and immersive interaction between users and their recorded experiences. A standout feature of GemDiary is its **podcast generation capability**, which transforms daily summaries into engaging audio narratives. This innovative podcast functionality allows users to effortlessly revisit and reflect on their day-to-day lives, offering a unique and accessible way to cherish memories and track personal growth over time. Made at build and blog hackathon google.
 
 ## Blog link
 https://medium.com/@jebinshaju4/gemdiary-your-ai-powered-digital-diary-and-podcast-companion-e6b03285a573
